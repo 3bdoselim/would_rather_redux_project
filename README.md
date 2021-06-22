@@ -19,4 +19,4 @@ showing the most answering user, also you can find un/answered polls
 * redux devtools extention
 * react-redux-loading-bar
 * react-router-dom
-* react-tabs
+* Material UI
