@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+
 
 const useStylesGrid = makeStyles((theme) => ({
     root: {
@@ -15,7 +18,7 @@ const useStylesGrid = makeStyles((theme) => ({
     },
     gridList: {
       width: 400,
-      height: 200,
+      height: 220,
       padding: '5px',
     },
     icon: {
@@ -23,6 +26,9 @@ const useStylesGrid = makeStyles((theme) => ({
     },
     card: {
         border: '1px solid #e0e0e0',
+    },
+    padding: {
+      padding: '10px'
     }
   }));
 function Leaderboard(props) {
@@ -31,13 +37,29 @@ function Leaderboard(props) {
 
     return (
         <div className={classesGrid.root}>
-        <GridList cellHeight={80} className={classesGrid.gridList}>
+        <GridList cellHeight={100} className={classesGrid.gridList}>
           {leaderboard.map((item) => (
             <GridListTile key={item.id} className={classesGrid.card}>
-                <p>
-                    <b>{item.name}</b>
-                </p>
-                <p>Score: {item.score}</p>
+              <Grid container spacing={3} className={classesGrid.padding}>
+                <Grid item xs={3}>
+                  <div>
+                    
+                    { item.avatarURL.length > 1
+                      ? <img
+                      src={item.avatarURL}
+                      alt={item.name}
+                    />
+                      : <Avatar>{item.name[0]}{item.name.split(' ')[1][0]}</Avatar>
+                    }
+                  </div>
+                </Grid>
+                <Grid item xs={9}>
+                  <div><b>{item.name}</b></div>
+                  <div><span>questions: {item.questions}</span></div>
+                  <div><span>answers: {item.answers}</span></div>
+                  <div><span>Score: {item.score}</span></div>
+                </Grid>
+              </Grid>
             </GridListTile>
           ))}
         </GridList>
@@ -55,7 +77,7 @@ const mapStateToProps = ({ users, questions, loggedUser }) => {
         const questions = users[userId].questions.length
         const score = answers + questions
 
-        return { name, id, avatarURL, score }
+        return { name, id, avatarURL, score, answers, questions }
     }).sort((a, b) => b.score - a.score)
 
     const userInfo = {

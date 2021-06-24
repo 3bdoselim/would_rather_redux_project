@@ -1,6 +1,6 @@
 import { USER_AUTH_LOGIN, USER_AUTH_LOGOUT } from "../actions/actionNames";
 
-const initialState = 'tylermcginnis'
+const initialState = ''
 
 export default function loggedUser(state = initialState, action) {
     switch (action.type) {

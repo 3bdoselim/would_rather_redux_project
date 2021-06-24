@@ -24,7 +24,7 @@ function Home(props) {
   const { isUserSelected, users, login } = props
   const classes = useStyles();
 
-  let ui = null
+  let ui = ''
   if (!isUserSelected) {
     ui =
     <div>
@@ -33,7 +33,7 @@ function Home(props) {
             <h2>Select a user</h2>
             <FormControl className={classes.formControl}>
               <InputLabel>User Name</InputLabel>
-                <Select>
+                <Select value=''>
                   {users.map(user => (
                     <MenuItem key={user.id} value={user.id} onClick={() => login(user.id)}>
                       {user.name}
@@ -50,7 +50,7 @@ function Home(props) {
   return ui
 }
 
-const mapStateToProps = ({ users, loggedUser, questions }) => {
+const mapStateToProps = ({ users, loggedUser }) => {
   const isUserSelected = loggedUser !== '' && Object.keys(users).includes(loggedUser)
 
   return {

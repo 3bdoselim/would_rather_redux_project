@@ -58,14 +58,14 @@ function Questions(props) {
         {questions.map((question) => (
           <GridListTile key={question.id}>
               <h4>{question.author.name}'s Question</h4>
-              <p>
+              <span>
                 Would you rather {' '}
                 <br/>
                 <br/>
                 <Chip label={question.optionOne.text}/>
                 {' '}or{' '}
                 <Chip label={question.optionTwo.text}/>
-              </p>
+              </span>
               <Link to={`/questions/${question.id}`} style={removeLinkDecoration}>
                 <Button color="primary" variant="contained">Poll</Button>
               </Link>
